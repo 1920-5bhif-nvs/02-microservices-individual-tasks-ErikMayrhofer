@@ -1,7 +1,6 @@
 package at.htl.person.control
 
 import at.htl.person.entity.Person
-import at.htl.task.entity.Task
 import javax.enterprise.context.ApplicationScoped
 import javax.inject.Inject
 import javax.persistence.EntityManager
@@ -9,6 +8,7 @@ import javax.transaction.Transactional
 
 @ApplicationScoped
 open class PersonDao {
+
     @Inject
     open lateinit var em: EntityManager
 
@@ -18,14 +18,14 @@ open class PersonDao {
     }
 
     @Transactional
-    open fun add(task: Person): Person {
-        em.persist(task)
-        return task
+    open fun add(person: Person): Person {
+        em.persist(person)
+        return person
     }
 
     @Transactional
-    open fun update(task: Person): Person {
-        return em.merge(task)
+    open fun update(person: Person): Person {
+        return em.merge(person)
     }
 
     @Transactional

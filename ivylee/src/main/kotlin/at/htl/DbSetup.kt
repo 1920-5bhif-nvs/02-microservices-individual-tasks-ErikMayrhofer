@@ -15,21 +15,21 @@ import javax.inject.Singleton
 open class DbSetup {
 
     @Inject
-    lateinit var personDao: PersonDao
+    open lateinit var personDao: PersonDao
 
     @Inject
-    lateinit var taskDao: TaskDao
+    open lateinit var taskDao: TaskDao
 
-    fun main(@Observes @Initialized(ApplicationScoped::class) init: Any?){
-        val persons = arrayOf(
-                Person().apply { firstName="Peter"; lastName="Muster" },
-                Person().apply { firstName="Klaus"; lastName="Dieter" }
-        )
-        persons.forEach { personDao.add(it) }
-
-        val tasks = (1..10).map {
-            Task().apply { text="TestTask_$it"; person=persons.random() }
-        }
-        tasks.forEach { taskDao.add(it) }
+    open fun main(@Observes @Initialized(ApplicationScoped::class) init: Any?){
+//        val persons = arrayOf(
+//                Person().apply { firstName="Peter"; lastName="Muster" },
+//                Person().apply { firstName="Klaus"; lastName="Dieter" }
+//        )
+//        persons.forEach { personDao.add(it) }
+//
+//        val tasks = (1..10).map {
+//            Task().apply { text="TestTask_$it"; person=persons.random() }
+//        }
+//        tasks.forEach { taskDao.add(it) }
     }
 }

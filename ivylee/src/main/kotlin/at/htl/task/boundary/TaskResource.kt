@@ -1,17 +1,21 @@
 package at.htl.task.boundary
 
+import at.htl.person.control.PersonDao
+import at.htl.person.entity.Person
 import at.htl.task.control.TaskDao
 import at.htl.task.entity.Task
 import javax.inject.Inject
-import javax.print.attribute.standard.Media
 import javax.ws.rs.*
 import javax.ws.rs.core.MediaType
+import javax.ws.rs.core.Response
 
 @Path("/tasks")
 open class TaskResource {
 
     @Inject
     lateinit var taskDao: TaskDao
+    @Inject
+    lateinit var personDao: PersonDao
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -50,5 +54,22 @@ open class TaskResource {
     @Produces(MediaType.APPLICATION_JSON)
     fun delete(@PathParam("id") id: Long): Task {
         return taskDao.delete(id)
+    }
+
+    @POST
+    @Path("/testdata")
+    fun genTestData(): Response{
+        val persons = arrayOf(
+            Person().apply { firstName="Peter"; lastName="Muster" },
+            Person().apply { firstName="Klaus"; lastName="Dieter" }
+        )
+        persons.forEach { personDao.add(it) }
+
+        val tasks = (1..10).map {
+            Task().apply { text="TestTask_$it"; person=persons.random() }
+        }
+        tasks.forEach { taskDao.add(it) }
+
+        return Response.ok("${persons.size} Persons added.").build()
     }
 }
