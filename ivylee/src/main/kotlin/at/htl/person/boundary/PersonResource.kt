@@ -53,13 +53,4 @@ open class PersonResource {
     fun delete(@PathParam("id") id: Long): Person {
         return taskDao.delete(id)
     }
-
-    @PostConstruct
-    @Transactional
-    fun setup(){
-        val persons = arrayOf(
-                Person().apply { firstName="Abc"; lastName="Def" },
-                Person().apply { firstName="Haa"; lastName="Eee" }
-        )
-    }
 }

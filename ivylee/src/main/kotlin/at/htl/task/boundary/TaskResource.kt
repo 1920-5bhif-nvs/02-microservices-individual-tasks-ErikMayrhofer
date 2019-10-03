@@ -66,10 +66,10 @@ open class TaskResource {
         persons.forEach { personDao.add(it) }
 
         val tasks = (1..10).map {
-            Task().apply { text="TestTask_$it"; person=persons.random() }
+            Task().apply {text="TestTask_$it"; person=persons.random() }
         }
         tasks.forEach { taskDao.add(it) }
 
-        return Response.ok("${persons.size} Persons added.").build()
+        return Response.ok("${persons.size} Persons and ${tasks.size} Tasks added.").build()
     }
 }

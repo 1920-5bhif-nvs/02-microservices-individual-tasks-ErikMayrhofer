@@ -6,18 +6,18 @@ import javax.persistence.*
 
 @Entity
 @NamedQuery(name="task.findAll", query = "select task from Task task")
-open class Task {
+data class Task(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     var id: Long? = null
-
-    open lateinit var text: String
+) {
+    lateinit var text: String
 
     // This is the day this task is schedule to be done
-    open var bigDay: Instant? = null
+    var bigDay: Instant? = null
 
-    open var done: Boolean = false
+    var done: Boolean = false
 
     @ManyToOne
-    open lateinit var person: Person
+    lateinit var person: Person
 }
