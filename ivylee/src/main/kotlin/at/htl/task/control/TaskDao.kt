@@ -1,5 +1,6 @@
 package at.htl.task.control
 
+import at.htl.person.entity.Person
 import at.htl.task.entity.Task
 import javax.enterprise.context.ApplicationScoped
 import javax.inject.Inject
@@ -20,6 +21,8 @@ open class TaskDao {
     @Transactional
     open fun add(task: Task): Task {
         em.persist(task)
+        em.flush()
+        em.refresh(task)
         return task
     }
 
