@@ -1,0 +1,30 @@
+= Todos
+
+Dies ist ein einfacher Todo-Manager geschrieben mit Quarkus.
+
+== Starten
+Das `docker-compose.yml` started die Datenbank (`:5432`) und den Prometheus server (`:9090`)
+
+== Prometheus
+Prometheus is ein Server, der die Metrics die, z.B von SmallRye generiert wurden grafisch darstellt. Wenn man die dependency
+
+[source, maven]
+----  
+<dependency>
+    <groupId>io.quarkus</groupId>
+    <artifactId>quarkus-smallrye-metrics</artifactId>
+</dependency>
+----
+
+einbindet, hat man von Haus aus mal den Endpoint `localhost:8181/metrics` 
+bereitgestellt. In der `prometheus.yml` wurde nun der Prometheus-Server so konfiguriert, dass er diesen Endpoint queried und die Resultate darstellt.
+
+== Istio
+Istio ist eine Infrastruktur, in der Microservices untereinander und mit der Außenwelt reden können. Dabei bietet es einen Load-Balancer und automatisierte Metrics zwischen den Services an.
+
+== Health und Metrics
+Es wurde ein DummyHealthEndpoint implementiert und einer, der überprüft,
+ob der todo-service läuft.
+
+== Unit Tests
+Es wurden 3 Unit Tests im todo project erstellt.
